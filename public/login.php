@@ -10,16 +10,19 @@ include(TEMPLATE_FRONT . DS . "header.php") // template dosyası çağırmak iç
     <div class="container">
 
       <header>
-            <h1 class="text-center">Login</h1>
-            <h4 class="text-center"><?php display_message(); ?></h4>
+            <h1 class="text-center">Giriş Yap</h1>
+            
+            <h4 class="text-center">
+              <?php display_message(); ?>
+            </h4>
         <div class="col-sm-4 col-sm-offset-5">
             <form class="" action="" method="post" enctype="multipart/form-data">
               <?php login_user(); ?>
                 <div class="form-group"><label for="">
-                    username<input type="text" name="username" class="form-control"></label>
+                    <input type="text" name="username" class="form-control" placeholder="Kullanıcı Adı"></label>
                 </div>
                  <div class="form-group"><label for="password">
-                    Password<input type="text" name="password" class="form-control"></label>
+                    <input type="text" name="password" class="form-control" placeholder="Şifre"></label>
                 </div>
 
                 <div class="form-group">

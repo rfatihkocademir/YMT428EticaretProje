@@ -173,6 +173,7 @@ function set_message($msg)
     $msg = "";
   }
 }
+
 function display_message()
 {
   if (isset($_SESSION['message'])) {
@@ -180,6 +181,7 @@ function display_message()
     unset($_SESSION['message']);
   }
 }
+
 
 //************************************BackEnd***********************//
 
@@ -212,48 +214,35 @@ function register_user()
     $password = escape_string($_POST['password']);
     //INSERT INTO `users` (`user_id`, `username`, `email`, `password`) VALUES (NULL, 'dmr', 'dmr@test.com', '123');
     //INSERT INTO users WHERE username = '{$username}' AND password = '{$password}'
-    $query = query("INSERT INTO users (`user_id`, `username`, `email`, `password`) VALUES(NULL,'{$username}','{$email}','{$password}')");
-    confirm($query);
 
-    // if (mysqli_num_rows($query) == 0) {
-    //   set_message("Kullanıcı Adı veya Şifreniz Yanlış!");
-    //   redirect("register.php");
-    // }
-    // else {
-    //   redirect("admin");
-    // }
+    $mail_kayitlimi = query("SELECT * FROM users WHERE email = '{$email}'");
+    $kontrol = mysqli_num_rows($mail_kayitlimi);
+    if ($kontrol == 0) {
+      $query = query("INSERT INTO users (`user_id`, `username`, `email`, `password`) VALUES(NULL,'{$username}','{$email}','{$password}')");
+      confirm($query);
+    }
+    else {
+      set_message("Bu E Posta Adresi Kullanımda!");
+    }
+
   }
 }
 
+function get_reviews()
+{
 
+    $query = query("SELECT * FROM product_reviews WHERE product_id =" . escape_string($_GET['id']). "");
+    confirm($query);
+    while ($row = fetch_array($query)) {
+      $reviews= <<<DELIMETER
+      {$row['reviewers_name']}
+      <p>{$row['product_review']}</p>
 
+DELIMETER;
+echo $reviews;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 

@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.php">Start Bootstrap</a>
+        <a class="navbar-brand" href="index.php">E-Sat</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -22,11 +22,9 @@
                 <a href="admin">Admin</a>
             </li>
              <li>
-                <a href="checkout.html">Checkout</a>
+                <a href="checkout.php">Checkout</a>
             </li>
-            <li>
-                <a href="contact.html">Contact</a>
-            </li>
+
 
         </ul>
     </div>
