@@ -244,7 +244,20 @@ echo $reviews;
 
 }
 
+function add_review()
+{
+  if(isset($_POST['gonder'])){
 
+
+    $name = escape_string($_POST['name']);
+    $review = escape_string($_POST['review']);
+    $query = query("INSERT INTO product_reviews (`id`,`product_id`,`products_review`,`reviewers_name`) VALUES(NULL,{$_GET['id']},'{$review}','{$name}')");
+    confirm($query);
+    
+  }
+
+
+}
 
 
 ?>

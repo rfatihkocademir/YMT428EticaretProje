@@ -97,14 +97,12 @@ include(TEMPLATE_FRONT . DS . "header.php") // template dosyası çağırmak iç
         <h3>Add A review</h3>
 
      <form action="" class="form-inline" method="post">
+       <?php add_review(); ?>
         <div class="form-group">
             <label for="">Name</label>
-                <input name="name"type="text" class="form-control" >
+                <input name="name"type="text" class="form-control" placeholder="Name" >
             </div>
-             <div class="form-group">
-            <label for="">Email</label>
-                <input name="email"type="test" class="form-control">
-            </div>
+
             <br>
              <div class="form-group">
              <textarea name="review" id="" cols="60" rows="10" class="form-control"></textarea>
@@ -113,7 +111,7 @@ include(TEMPLATE_FRONT . DS . "header.php") // template dosyası çağırmak iç
              <br>
               <br>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="SUBMIT">
+                <input type="submit" name="gonder" class="btn btn-primary" value="SUBMIT">
             </div>
         </form>
 
