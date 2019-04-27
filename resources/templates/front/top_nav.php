@@ -16,13 +16,31 @@
                 <a href="shop.php">Shop</a>
             </li>
             <li>
-                <a href="login.php">Login</a>
+              <?php if (isset($_SESSION["oturum"])) {
+
+                echo '<a href = "admin">'.$_SESSION["username"].'</a>';
+
+            }
+                    else {
+                    echo  '<a href="login.php">Login</a>';
+                    }
+            ?>
+
             </li>
             <li>
                 <a href="admin">Admin</a>
             </li>
              <li>
                 <a href="checkout.php">Checkout</a>
+            </li>
+            <li>
+              <?php if (isset($_SESSION["oturum"])) {
+
+                echo '<a href = "cıkıs.php">Çıkış Yap</a>';
+
+            }
+                  
+            ?>
             </li>
 
 

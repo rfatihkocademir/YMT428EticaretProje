@@ -200,11 +200,15 @@ function login_user()
         redirect("login.php");
       }
       else {
-        set_message("Welcome to Admin {$username}");
-        redirect("admin");
+        $_SESSION["oturum"] = true;
+        $_SESSION["kullancıAdı"] = $username;
+        $_SESSION["password"] = $password;
+        redirect("index.php");
       }
     }
+
 }
+
 
 function register_user()
 {

@@ -11,13 +11,19 @@ include(TEMPLATE_FRONT . DS . "header.php") // template dosyası çağırmak iç
 
       <header>
             <h1 class="text-center">Giriş Yap</h1>
-            
+
             <h4 class="text-center">
               <?php display_message(); ?>
             </h4>
         <div class="col-sm-4 col-sm-offset-5">
             <form class="" action="" method="post" enctype="multipart/form-data">
-              <?php login_user(); ?>
+              <?php
+              if (isset($_SESSION["oturum"])) {
+                redirect("index.php");
+              }
+              else {
+              login_user(); }
+              ?>
                 <div class="form-group"><label for="">
                     <input type="text" name="username" class="form-control" placeholder="Kullanıcı Adı"></label>
                 </div>
