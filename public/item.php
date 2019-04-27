@@ -105,14 +105,15 @@ include(TEMPLATE_FRONT . DS . "header.php") // template dosyası çağırmak iç
 
             <br>
              <div class="form-group">
-             <textarea name="review" id="" cols="60" rows="10" class="form-control"></textarea>
+             <textarea type="textarea" name="review" id="" cols="60" rows="10" class="form-control"></textarea>
             </div>
 
              <br>
               <br>
             <div class="form-group">
-                <input type="submit" name="gonder" class="btn btn-primary" value="SUBMIT">
+                <input type="submit" name="submit" class="btn btn-primary" >
             </div>
+
         </form>
 
     </div>
