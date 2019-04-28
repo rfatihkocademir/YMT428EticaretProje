@@ -44,7 +44,7 @@ function get_products()//Veritabanından ürün bilgilerini çeken yardımcı fo
                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                 </h4>
                 <p>{$row['product_description']}</p>
-                <a class="btn btn-primary" target="_blank" href="item.php?id={$row['product_id']}">Sepete Ekle</a>
+                <a class="btn btn-primary" target="_blank" href="item.php?id={$row['product_id']}">Ürünü İncele</a>
             </div>
           </div>
   </div>
@@ -94,6 +94,7 @@ DELIMETER;
 
 
 
+
 //-------------------------------------------------------------------------------
 
 
@@ -132,7 +133,7 @@ function get_products_in_cat_page()//Veritabanından ürün bilgilerini çeken y
                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                 </h4>
                 <p>{$row['product_description']}</p>
-                <a class="btn btn-primary" target="_blank" href="item.php?id={$row['product_id']}">Sepete Ekle</a>
+                <a class="btn btn-primary" target="_blank" href="item.php?id={$row['product_id']}">Ürünü İncele</a>
             </div>
           </div>
   </div>
@@ -155,7 +156,7 @@ function get_products_in_shop_page()//Veritabanından ürün bilgilerini çeken 
                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                 </h4>
                 <p>{$row['product_description']}</p>
-                <a class="btn btn-primary" target="_blank" href="item.php?id={$row['product_id']}">Sepete Ekle</a>
+                <a class="btn btn-primary" target="_blank" href="item.php?id={$row['product_id']}">Ürünü İncele</a>
             </div>
           </div>
   </div>
@@ -192,6 +193,8 @@ function login_user()
       $username = escape_string($_POST['username']);
       $password = escape_string($_POST['password']);
 
+      
+
       $query = query("SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}'");
       confirm($query);
 
@@ -203,6 +206,7 @@ function login_user()
         $_SESSION["oturum"] = true;
         $_SESSION["kullancıAdı"] = $username;
         $_SESSION["password"] = $password;
+        echo $_SESSION["kullancıAdı"];
         redirect("index.php");
       }
     }

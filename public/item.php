@@ -52,8 +52,8 @@ include(TEMPLATE_FRONT . DS . "header.php") // template dosyası çağırmak iç
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Ürün Açıklaması</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Yorumlar</a></li>
 
   </ul>
 
@@ -74,12 +74,12 @@ include(TEMPLATE_FRONT . DS . "header.php") // template dosyası çağırmak iç
 
   <div class="col-md-6">
 
-       <h3>2 Reviews From </h3>
+       <h3>Kullanıcı Yorumları </h3>
 
         <hr>
 
-        <div class="row">
-            <div class="col-md-12">
+        <div class="row ">
+            <div class="col-md-12 thumbnail">
                 <?php get_reviews(); ?>
             </div>
         </div>
@@ -99,7 +99,7 @@ include(TEMPLATE_FRONT . DS . "header.php") // template dosyası çağırmak iç
      <form action="" class="form-inline" method="post">
        <?php add_review(); ?>
         <div class="form-group">
-            <label for="">Name</label>
+            <label for=""></label>
                 <input name="name"type="text" class="form-control" placeholder="Name" >
             </div>
 

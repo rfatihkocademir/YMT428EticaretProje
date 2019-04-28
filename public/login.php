@@ -25,10 +25,10 @@ include(TEMPLATE_FRONT . DS . "header.php") // template dosyası çağırmak iç
               login_user(); }
               ?>
                 <div class="form-group"><label for="">
-                    <input type="text" name="username" class="form-control" placeholder="Kullanıcı Adı"></label>
+                    <input type="text" name="username" class="form-control" placeholder="Kullanıcı Adı" required="required"></label>
                 </div>
                  <div class="form-group"><label for="password">
-                    <input type="text" name="password" class="form-control" placeholder="Şifre"></label>
+                    <input type="text" name="password" class="form-control" placeholder="Şifre" required="required"></label>
                 </div>
 
                 <div class="form-group">

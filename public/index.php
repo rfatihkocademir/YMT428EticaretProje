@@ -15,6 +15,7 @@ include(TEMPLATE_FRONT . DS . "header.php") // template dosyası çağırmak iç
           <!--kagetoriler burda-->
           <?php
           include(TEMPLATE_FRONT . DS . "side_nav.php") // template dosyası çağırmak için.
+
           ?>
 
 
@@ -30,7 +31,7 @@ include(TEMPLATE_FRONT . DS . "header.php") // template dosyası çağırmak iç
 
                 <div class="row">
 
-                    <?php get_products(); ?>
+                    <?php get_products(); echo $_SESSION["kullancıAdı"];?>
 
 
 
