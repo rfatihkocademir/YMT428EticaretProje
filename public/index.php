@@ -31,7 +31,8 @@ include(TEMPLATE_FRONT . DS . "header.php") // template dosyası çağırmak iç
 
                 <div class="row">
 
-                    <?php get_products(); echo $_SESSION["kullancıAdı"];?>
+                    <?php get_products(); 
+                    ?>
 
 
 

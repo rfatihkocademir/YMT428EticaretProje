@@ -44,7 +44,7 @@ function get_products()//Veritabanından ürün bilgilerini çeken yardımcı fo
                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                 </h4>
                 <p>{$row['product_description']}</p>
-                <a class="btn btn-primary" target="_blank" href="item.php?id={$row['product_id']}">Ürünü İncele</a>
+                <a class="btn btn-primary"  href="item.php?id={$row['product_id']}">Ürünü İncele</a>
             </div>
           </div>
   </div>
@@ -75,8 +75,9 @@ function get_products_in_item_page()//Veritabanından ürün bilgilerini çeken 
         </div>
         <p>{$row['product_description'] }</p>
         <form action="">
-            <div class="form-group">
-                <a class="btn btn-primary" target="_blank" href="item.php?id={$row['product_id']}">Sepete Ekle</a>
+
+            <div class="form-group" method="post">
+                <a class="btn btn-primary"  href="sepet.php?ekle={$row['product_id']}">Sepete Ekle</a>
             </div>
         </form>
         </div>
@@ -85,6 +86,9 @@ function get_products_in_item_page()//Veritabanından ürün bilgilerini çeken 
 DELIMETER;
     echo $product;
   }
+
+
+
 }
 
 
@@ -133,7 +137,7 @@ function get_products_in_cat_page()//Veritabanından ürün bilgilerini çeken y
                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                 </h4>
                 <p>{$row['product_description']}</p>
-                <a class="btn btn-primary" target="_blank" href="item.php?id={$row['product_id']}">Ürünü İncele</a>
+                <a class="btn btn-primary"  href="item.php?id={$row['product_id']}">Ürünü İncele</a>
             </div>
           </div>
   </div>
@@ -156,7 +160,7 @@ function get_products_in_shop_page()//Veritabanından ürün bilgilerini çeken 
                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                 </h4>
                 <p>{$row['product_description']}</p>
-                <a class="btn btn-primary" target="_blank" href="item.php?id={$row['product_id']}">Ürünü İncele</a>
+                <a class="btn btn-primary"  href="item.php?id={$row['product_id']}">Ürünü İncele</a>
             </div>
           </div>
   </div>
@@ -193,7 +197,7 @@ function login_user()
       $username = escape_string($_POST['username']);
       $password = escape_string($_POST['password']);
 
-      
+
 
       $query = query("SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}'");
       confirm($query);
