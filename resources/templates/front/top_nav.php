@@ -17,8 +17,8 @@
             </li>
 
 
-             <li>
-                <a href="checkout.php">Sepet</a>
+             <li><?php echo '<a href="checkout.php">Sepet</a>' ?>
+
             </li>
             <li>
               <?php if (isset($_SESSION["oturum"])) {

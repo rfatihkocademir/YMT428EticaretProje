@@ -1,3 +1,6 @@
+<?php
+require_once("C://xampp/htdocs/Proje/resources/config.php"); // php dosyası çağırmak için.
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +56,7 @@
               <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                       
+
                         <li class="divider"></li>
                         <li>
                             <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
@@ -73,14 +76,14 @@
                     <li>
                         <a href="tables.html"><i class="fa fa-fw fa-table"></i> Add Product</a>
                     </li>
-                    
+
                     <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Categories</a>
+                        <a href="#"><i class="fa fa-fw fa-desktop"></i> Categories</a>
                     </li>
                     <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i>Orders</a>
+                        <a href="#"><i class="fa fa-fw fa-wrench"></i>Orders</a>
                     </li>
-                
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -92,9 +95,9 @@
 
             <div class="container-fluid">
 
-            
 
-            
+
+
 
 <h1 class="page-header">
   Product Categories
@@ -103,19 +106,19 @@
 
 
 <div class="col-md-4">
-    
+
     <form action="" method="post">
-    
+
         <div class="form-group">
-            <label for="category-title">Title</label>
-            <input type="text" class="form-control">
+            <label for="category-title">Kategori Adı</label>
+            <input type="text" name="cat_title"class="form-control">
         </div>
 
         <div class="form-group">
-            
-            <input type="submit" class="btn btn-primary" value="Add Category">
-        </div>      
 
+            <input type="submit" name="submit" class="btn btn-primary" value="Add Category">
+        </div>
+          <?php  add_categories(); ?>
 
     </form>
 
@@ -148,7 +151,7 @@
 
 
 
-                
+
 
 
 

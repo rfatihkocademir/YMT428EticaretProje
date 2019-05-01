@@ -114,7 +114,23 @@ DELIMETER;
 echo $categories_links;
   }
 }
+function add_categories()
+{
+  if (isset($_POST['submit'])) {
+    $cat_title = $_POST['cat_title'];
+    $kategori_kayitlimi = query("SELECT * FROM categories WHERE cat_title = '{$cat_title}'");
+    $kontrol = mysqli_num_rows($kategori_kayitlimi);
 
+    if ($kontrol == 0) {
+    $query= query("INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES (NULL, '{$cat_title}')");
+    confirm($query);
+    echo "Başarıyla Eklendi";
+    }
+    else {
+      echo " Bu kategori zaten ekli !";
+    }
+  }
+}
 
 
 
@@ -201,15 +217,17 @@ function login_user()
 
       $query = query("SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}'");
       confirm($query);
-
+      $row = fetch_array($query);
       if (mysqli_num_rows($query) == 0) {
         set_message("Kullanıcı Adı veya Şifreniz Yanlış!");
         redirect("login.php");
       }
       else {
         $_SESSION["oturum"] = true;
-        $_SESSION["kullancıAdı"] = $username;
+        $_SESSION["kullancıID"]= $row['user_id'];
+        $_SESSION["kullancıAdı"] = $row['username'];
         $_SESSION["password"] = $password;
+        setcookie('id['.$_SESSION['kullancıID'].']',$_SESSION['kullancıID'],time()+86400);
         echo $_SESSION["kullancıAdı"];
         redirect("index.php");
       }
@@ -269,6 +287,9 @@ function add_review()
 
 
 }
+
+
+
 
 
 ?>

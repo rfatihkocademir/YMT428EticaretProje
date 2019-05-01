@@ -32,7 +32,7 @@ include(TEMPLATE_FRONT . DS . "header.php") // template dosyası çağırmak iç
                 </div>
 
                 <div class="form-group">
-                  <input type="submit" name="submit" class="btn btn-primary" >
+                  <input type="submit" name="submit" class="btn btn-primary" value="Giriş Yap" >
 
                 </div>
 
