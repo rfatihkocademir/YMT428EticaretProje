@@ -1,5 +1,12 @@
 <?php
-require_once("C://xampp/htdocs/Proje/resources/config.php"); // php dosyası çağırmak için.
+require_once("../../resources/config.php"); // php dosyası çağırmak için.
+?>
+<?php if (isset($_SESSION['oturum_admin'])) {
+    echo $_SESSION['oturum_admin'];
+}
+else {
+  header("Location:SayfaBulunamadı.php");
+}
 ?>
 <!DOCTYPE html>
 

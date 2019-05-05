@@ -268,7 +268,8 @@ function display_message()
 
 function login_user()
 {
-
+  if(isset($_SESSION['oturum_admin'])){ echo "Admin Girişi Yapılmış!";}
+    else{
     if(isset($_POST['submit'])){
       $username = escape_string($_POST['username']);
       $password = escape_string($_POST['password']);
@@ -287,12 +288,38 @@ function login_user()
         $_SESSION["kullancıID"]= $row['user_id'];
         $_SESSION["kullancıAdı"] = $row['username'];
         $_SESSION["password"] = $password;
-        setcookie('id['.$_SESSION['kullancıID'].']',$_SESSION['kullancıID'],time()+86400);
-        echo $_SESSION["kullancıAdı"];
+        $_SESSION["yetki"]  = 0;
         redirect("index.php");
       }
     }
+  }
 
+}
+function admin_login()
+{
+  if(isset($_POST['submit'])){
+    $username = escape_string($_POST['admin_username']);
+    $password = escape_string($_POST['password']);
+
+
+
+    $query = query("SELECT * FROM admin WHERE admin_username = '{$username}' AND admin_password = '{$password}'");
+    confirm($query);
+    $row = fetch_array($query);
+    if (mysqli_num_rows($query) == 0) {
+
+      redirect("admin_login.php");
+    }
+    else {
+      $_SESSION["oturum_admin"] = true;
+      $_SESSION["yetki"]  = 1;
+      $_SESSION["adminID"]= $row['user_id'];
+      $_SESSION["admin_username"] = $row['admin_username'];
+      $_SESSION["password"] = $password;
+
+      redirect("index.php");
+    }
+  }
 }
 
 

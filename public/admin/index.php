@@ -1,7 +1,13 @@
 <?php
 require_once("../../resources/config.php"); // php dosyası çağırmak için.
 ?>
-
+<?php if (isset($_SESSION['oturum_admin'])) {
+    echo $_SESSION['oturum_admin'];
+}
+else {
+  header("Location:SayfaBulunamadı.php");
+}
+?>
 
 
 <body>
