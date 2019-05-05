@@ -101,7 +101,18 @@ DELIMETER;
 
 //-------------------------------------------------------------------------------
 
+function get_categories_in_options()
+{
+  $query = query("SELECT * FROM categories");
+  confirm($query);
+  while($row = fetch_array($query)){
 
+$categories_links = <<<DELIMETER
+  <option href = '#' class= 'list-group-item' name="ürünKategorisi" value="{$row['cat_id']}" > {$row['cat_title']}</option>
+DELIMETER;
+echo $categories_links;
+  }
+}
 function get_categories()
 {
   $query = query("SELECT * FROM categories");
@@ -131,6 +142,54 @@ function add_categories()
     }
   }
 }
+function add_product()
+{
+
+  $dosyaYolu = "uploads";
+  if (isset($_POST['submit'])) {
+
+
+    $product_title          = escape_string($_POST['product_title']);
+    $product_category_id    = escape_string($_POST['product_category_id']);
+    $product_price          = escape_string($_POST['product_price']);
+    $product_description    = escape_string($_POST['product_description']);
+    $short_description      = escape_string($_POST['short_description']);
+    $product_image          = escape_string($_FILES['file']['name']);
+    $image_temp_location    = escape_string($_FILES['file']['tmp_name']);
+    $UrunSayısı             = escape_string($_POST['urunSayisi']);
+    $dosyaadı = rand( 0, 9999).$product_image;
+    $yol = "../../resources/uploads/";
+    $new_image_location     = $yol . $dosyaadı;
+
+    copy($image_temp_location, $new_image_location);
+    $veritabanı_resim_adresi = "../resources/uploads/".$dosyaadı;
+    $ürün_kayitlimi = query("SELECT * FROM products WHERE product_title = '{$product_title}'");
+
+    $kontrol = mysqli_num_rows($ürün_kayitlimi);
+    if ($kontrol == 0) {
+      $query = query("INSERT INTO `products` (`product_id`, `product_title`, `product_category_id`, `product_price`, `product_description`, `short_description`, `product_image`, `urunSayisi`) VALUES
+                                             (NULL, '$product_title', '$product_category_id', '$product_price', '$product_description', '$short_description', '$veritabanı_resim_adresi', '$UrunSayısı')");
+    }
+  }
+}
+function get_products_in_admin_page()
+{
+  $query = query("SELECT * FROM products");
+  confirm($query);
+  while ($row = fetch_array($query)) {
+    $product = <<<DELIMETER
+    <tr>
+          <td>{$row['product_id']}</td>
+          <td><img src="{$row['product_image']}" width="64" height="64" alt=""></td>
+          <td>{$row['product_title']}</td>
+          <td>{$row['product_category_id']}</td>
+          <td>{$row['product_price']}₺</td>
+          <td><a type="submit" name="submit" class="btn btn-primary" href="edit_product.php?ürünid={$row['product_id']}" >Düzenle</a> <a type="submit" name="submit" class="btn btn-warning" href="sil.php?ürünid={$row['product_id']}">Sil</a> </td>
+      </tr>
+DELIMETER;
+    echo $product;
+  }
+}
 
 
 
@@ -143,11 +202,12 @@ function get_products_in_cat_page()//Veritabanından ürün bilgilerini çeken y
   confirm($query);
 
   while ($row = fetch_array($query)) {
+    echo $row['product_image'];
     // HTML kodlarını DELIMETER'in içine atıp döngü haline getiriyoruz.
     $product = <<<DELIMETER
 <div class="col-sm-4 col-lg-4 col-md-4">
       <div class="thumbnail">
-        <img src="{$row['product_image']}" alt="">
+        <img class="img-responsive" src="{$row['product_image']}" width="320" height="150" alt="">
             <div class="caption">
                 <h4 class="pull-right">₺{$row['product_price']}</h4>
                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
@@ -170,7 +230,7 @@ function get_products_in_shop_page()//Veritabanından ürün bilgilerini çeken 
     $product = <<<DELIMETER
 <div class="col-sm-4 col-lg-4 col-md-4">
       <div class="thumbnail">
-        <img src="{$row['product_image']}" alt="">
+        <img src="{$row['product_image']}" width="320" height="150" alt="">
             <div class="caption">
                 <h4 class="pull-right">₺{$row['product_price']}</h4>
                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
