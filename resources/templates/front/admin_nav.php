@@ -65,7 +65,7 @@
                 <a href="index.php/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
             <li>
-                <a href="products.php"><i class="fa fa-fw fa-bar-chart-o"></i> View Products</a>
+                <a href="products.php"><i class="fa fa-fw fa-bar-chart-o"></i> Ürün Sil/Düzenle</a>
             </li>
             <li>
                 <a href="add_product.php"><i class="fa fa-fw fa-table"></i> Ürün Ekle</a>

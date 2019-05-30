@@ -43,7 +43,7 @@ function get_products()//Veritabanından ürün bilgilerini çeken yardımcı fo
                 <h4 class="pull-right">₺{$row['product_price']}</h4>
                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                 </h4>
-                <p>{$row['product_description']}</p>
+                <p>{$row['short_description']}</p>
                 <a class="btn btn-primary"  href="item.php?id={$row['product_id']}">Ürünü İncele</a>
             </div>
           </div>
@@ -73,7 +73,7 @@ function get_products_in_item_page()//Veritabanından ürün bilgilerini çeken 
             <h4 class="">₺  {$row['product_price']} </h4>
         <div class="ratings">
         </div>
-        <p>{$row['product_description'] }</p>
+        <p>{$row['short_description'] }</p>
         <form action="">
 
             <div class="form-group" method="post">
@@ -150,7 +150,7 @@ function add_product()
 
 
     $product_title          = escape_string($_POST['product_title']);
-    $product_category_id    = escape_string($_POST['product_category_id']);
+    $product_category_id    = escape_string($_POST['cat_id']);
     $product_price          = escape_string($_POST['product_price']);
     $product_description    = escape_string($_POST['product_description']);
     $short_description      = escape_string($_POST['short_description']);
@@ -167,11 +167,119 @@ function add_product()
 
     $kontrol = mysqli_num_rows($ürün_kayitlimi);
     if ($kontrol == 0) {
-      $query = query("INSERT INTO `products` (`product_id`, `product_title`, `product_category_id`, `product_price`, `product_description`, `short_description`, `product_image`, `urunSayisi`) VALUES
+      $query = query("INSERT INTO `products` (`product_id`, `product_title`, `cat_id`, `product_price`, `product_description`, `short_description`, `product_image`, `urunSayisi`) VALUES
                                              (NULL, '$product_title', '$product_category_id', '$product_price', '$product_description', '$short_description', '$veritabanı_resim_adresi', '$UrunSayısı')");
     }
   }
 }
+
+function edit_product()
+{
+  $ürünID= $_GET['ürünid'];
+  $query=query("SELECT * FROM products WHERE product_id = '{$ürünID}'");
+  confirm($query);
+  $row = fetch_array($query);
+
+  $form = <<<DELİMETER
+  <form action="" method="post" enctype="multipart/form-data">
+
+  <div class="col-md-8">
+
+  <div class="form-group">
+      <label for="product-title">Ürün Adı </label>
+          <input type="text" name="product_title" class="form-control" required="required" value="{$row['product_title']}">
+
+      </div>
+
+
+      <div class="form-group">
+             <label for="product-title">Ürün Açıklaması</label>
+        <textarea name="product_description" id="" cols="30" rows="10" class="form-control" required="required" value="{$row['product_description']}"></textarea>
+      </div>
+
+
+
+      <div class="form-group row">
+
+        <div class="col-xs-3">
+          <label for="product-price">Ürün Fiyatı</label>
+          <input type="number" name="product_price" class="form-control" size="60" value="{$row['product_price']}">
+        </div>
+        <div class="col-xs-3">
+          <label for="product-price">Stok Sayısı</label>
+          <input type="number" name="urunSayisi" class="form-control" size="60" value="{$row['urunSayisi']}">
+        </div>
+      </div>
+  </div><!--Main Content-->
+
+
+  <!-- SIDEBAR-->
+
+
+  <aside id="admin_sidebar" class="col-md-4">
+
+
+       <div class="form-group">
+
+          <input type="submit" name="submit" class="btn btn-primary btn-lg" value="Yayınla">
+      </div>
+
+
+       <!-- Product Categories-->
+
+
+  <!-- Product Tags -->
+
+
+      <div class="form-group">
+            <label for="product-title">Ürün Kısa Açıklama</label>
+            <hr>
+          <textarea type="textarea" name="short_description" class="form-control" required="required" value="{$row['short_description']}"> </textarea>
+      </div>
+
+      <!-- Product Image -->
+      <div class="form-group">
+          <label for="product-title">Ürün Resmi</label>
+          <input type="file" name="file">
+
+      </div>
+
+
+
+  </aside><!--SIDEBAR-->
+
+
+
+  </form>
+DELİMETER;
+echo $form;
+
+  if (isset($_POST['submit'])) {
+
+
+    $product_title          = escape_string($_POST['product_title']);
+
+    $product_price          = escape_string($_POST['product_price']);
+    $product_description    = escape_string($_POST['product_description']);
+    $short_description      = escape_string($_POST['short_description']);
+    $product_image          = escape_string($_FILES['file']['name']);
+    $image_temp_location    = escape_string($_FILES['file']['tmp_name']);
+    $UrunSayısı             = escape_string($_POST['urunSayisi']);
+    $dosyaadı = rand( 0, 9999).$product_image;
+    $yol = "../../resources/uploads/";
+    $new_image_location     = $yol . $dosyaadı;
+
+    copy($image_temp_location, $new_image_location);
+    $veritabanı_resim_adresi = "..\\resources\\uploads\\".$dosyaadı;
+    //UPDATE `products` SET `product_title` = 'asus Notebook', `product_category_id` = '5', `product_price` = '7933', `product_description` = 'sagfagsgapshıfbjlvnamskpğuphogubjknkmlkpopu9y8guıvkbjnasfasfasfasfdgasfasfas', `short_description` = 'ouıgyfgvnhjkmloşıugfythcgvnbjkojıuygftgcvbasfasf', `product_image` = '../resources/uploads/7617asus.jpg', `urunSayisi` = '987' WHERE `products`.`product_id` = 41;
+      $query = query("UPDATE 'products' SET `product_title` = '{$product_title}', `product_price` = '{$product_price}',  `product_description` = '{$product_description}', `short_description` = '{$short_description}'WHERE `products`.`product_id` = {$ürünID}");
+      $query2 = query("UPDATE 'products' SET `product_image` = '{$veritabanı_resim_adresi}', 'urunSayisi' = '{$UrunSayısı}' WHERE `products`.`product_id` = {$ürünID}");
+      confirm($query);
+      confirm($query2);
+  }
+}
+
+
 function get_products_in_admin_page()
 {
   $query = query("SELECT * FROM products");
@@ -182,12 +290,29 @@ function get_products_in_admin_page()
           <td>{$row['product_id']}</td>
           <td><img src="{$row['product_image']}" width="64" height="64" alt=""></td>
           <td>{$row['product_title']}</td>
-          <td>{$row['product_category_id']}</td>
+          <td>{$row['cat_id']}</td>
           <td>{$row['product_price']}₺</td>
           <td><a type="submit" name="submit" class="btn btn-primary" href="edit_product.php?ürünid={$row['product_id']}" >Düzenle</a> <a type="submit" name="submit" class="btn btn-warning" href="sil.php?ürünid={$row['product_id']}">Sil</a> </td>
       </tr>
 DELIMETER;
     echo $product;
+  }
+}
+
+function get_categories_in_admin_page()
+{
+  $query = query("SELECT * FROM categories");
+  confirm($query);
+  while ($row = fetch_array($query)) {
+    $product = <<<DELIMETER
+
+  <tr>
+      <td>{$row['cat_id']}</td>
+      <td>{$row['cat_title']}</td>
+      <td> <a type="submit" name="submit" class="btn btn-warning" href="sil.php?cat_id={$row['cat_id']}">Sil</a> </td>
+  </tr>
+DELIMETER;
+echo $product;
   }
 }
 
@@ -198,11 +323,11 @@ DELIMETER;
 
 function get_products_in_cat_page()//Veritabanından ürün bilgilerini çeken yardımcı fonksiyon
 {
-  $query = query("SELECT * FROM products WHERE product_category_id = " .escape_string($_GET['id']) ." ");
+  $query = query("SELECT * FROM products WHERE cat_id = " .escape_string($_GET['id']) ." ");
   confirm($query);
 
   while ($row = fetch_array($query)) {
-    echo $row['product_image'];
+
     // HTML kodlarını DELIMETER'in içine atıp döngü haline getiriyoruz.
     $product = <<<DELIMETER
 <div class="col-sm-4 col-lg-4 col-md-4">
@@ -212,7 +337,7 @@ function get_products_in_cat_page()//Veritabanından ürün bilgilerini çeken y
                 <h4 class="pull-right">₺{$row['product_price']}</h4>
                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                 </h4>
-                <p>{$row['product_description']}</p>
+                <p>{$row['short_description']}</p>
                 <a class="btn btn-primary"  href="item.php?id={$row['product_id']}">Ürünü İncele</a>
             </div>
           </div>
@@ -235,7 +360,7 @@ function get_products_in_shop_page()//Veritabanından ürün bilgilerini çeken 
                 <h4 class="pull-right">₺{$row['product_price']}</h4>
                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                 </h4>
-                <p>{$row['product_description']}</p>
+                <p>{$row['short_description']}</p>
                 <a class="btn btn-primary"  href="item.php?id={$row['product_id']}">Ürünü İncele</a>
             </div>
           </div>
@@ -374,9 +499,5 @@ function add_review()
 
 
 }
-
-
-
-
 
 ?>

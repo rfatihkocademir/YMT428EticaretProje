@@ -60,16 +60,14 @@ else {
 
         <tr>
             <th>id</th>
-            <th>Title</th>
+            <th>Başlık</th>
+            <th>Sil</th>
         </tr>
             </thead>
 
 
     <tbody>
-        <tr>
-            <td>20</td>
-            <td>Example Title</td>
-        </tr>
+      <?php    get_categories_in_admin_page(); ?>
     </tbody>
 
         </table>

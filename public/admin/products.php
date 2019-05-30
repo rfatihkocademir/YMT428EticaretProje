@@ -23,8 +23,8 @@ else {
              <div class="row">
 
 <h1 class="page-header">
-   All Products
-   
+  Tüm Ürünler
+
 
 </h1>
 <table class="table table-hover">

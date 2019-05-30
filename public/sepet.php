@@ -25,7 +25,15 @@ if (isset($_SESSION['oturum'])) {
     }
 }
 else {
-  echo "Sepete Ürün Eklemek İçin Lütfen Giriş Yapınız";
+  echo '<div class="text-center p-t-115">
+
+
+    <a class="txt2" >
+      Sepete Ürün Eklemek İçin Lütfen Giriş Yapınız
+    </a>
+  </div>';
+
+
   header('Refresh:2 ; login.php');
 }
 function SepetiGöster()
@@ -36,13 +44,33 @@ function SepetiGöster()
             confirm($query);
             while ($row = fetch_array($query)) {
               $goster = <<<DELIMETER
-            <p><strong> {$row['product_id']} *-*-*--*-*-*-*-*-* {$row['product_title']} <a class="btn btn-primary"  href="?cıkart={$row['product_id']}">Sepetten Çıkart</a>
-            </strong> </p>
+            
+
+
+<table class="table">
+  <thead>
+    <tr>
+
+      <th scope="col">Ürün Adı</th>
+
+      <th scope="col">Çıkart</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+      <td>{$row['product_title']}</td>
+
+      <td><a class="btn btn-primary"  href="?cıkart={$row['product_id']}">Sepetten Çıkart</a></td>
+    </tr>
+  </tbody>
+</table>
 DELIMETER;
   echo $goster;
             }
         }
-        echo '<a class="btn btn-danger"  href="?&bosalt=true">Sepeti Boşalt</a>';
+        echo '<a class="btn btn-danger"  href="?&bosalt=true">Sepeti Boşalt</a><br>';
+        echo "<br> <a class= 'btn btn-primary'   href='onayla.php'>Sepeti Onayla </a>"  ;
     }
 }
 ?>
